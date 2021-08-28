@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOCK ANALYSIS</title>
+    <link rel="stylesheet" href="style1.css">
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Mon', 20, 28, 38, 45],
+      ['Tue', 31, 38, 55, 66],
+      ['Wed', 50, 55, 77, 80],
+      ['Thu', 77, 77, 66, 50],
+      ['Fri', 68, 66, 22, 15]
+      // Treat first row as data as well.
+    ], true);
+
+    var options = {
+      legend:'none'
+    };
+
+    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+    chart.draw(data, options);
+  }
+    </script>
+
+
+</head>
+
+<body>
+    <h1 style="text-align: center; font-size: 50px;color: maroon;"> <u>STOCK ANALYSIS</u> </h1>
+
+    <script>
+        fetch("stock.json")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.sentence)
+                document.querySelector("#debug").innerText = data.sentence
+            }) 
+
+    </script>
+
+
+    <div id="chart_div" class="chart"></div>
+
+</body>
+
+</html>
